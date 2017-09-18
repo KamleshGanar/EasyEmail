@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model EmailTest.Models.EmailUsModel
+
+
+<h2>Index</h2>
+
+<hr />
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm("EmailUs", "EmailUs", FormMethod.Post, new { id = "EmailsUsForm", enctype = "multipart/form-data" }))
+        {
+            <div class="col-sm-12">
+                <span class="col-sm-12">To</span>
+                <div class="clearfix"></div>
+                @Html.TextBoxFor(m => m.To, new { @class = "form-control" })
+            </div>
+            <div class="col-sm-12">
+                <span class="col-sm-12">Cc</span>
+                <div class="clearfix"></div>
+                @Html.TextBoxFor(m => m.Cc, new { @class = "form-control" })
+            </div>
+            <div class="col-sm-12">
+                <span class="col-sm-12">Bcc</span>
+                <div class="clearfix"></div>
+                @Html.TextBoxFor(m => m.Bcc, new { @class = "form-control" })
+            </div>
+            <div class="col-sm-12">
+                <span class="col-sm-12">Subject</span>
+                <div class="clearfix"></div>
+                @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
+            </div>
+            <div class="col-sm-12">
+                <span class="col-sm-12">Message</span>
+                <div class="clearfix"></div>
+                @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+            </div>
+            <br />
+            <span>Any Attachments</span>
+            <input type="file" name="file" />
+
+            <input type="submit" value="Send" />
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
