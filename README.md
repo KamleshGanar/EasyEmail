@@ -91,7 +91,7 @@ if (file != null && file.ContentLength > 0)
 e.Send(true);
 ```
 
-# Send() and SendAsync Method
+# Send() and SendAsync() Method
 This two method are use to send the email and having two overloading method of each methods.<br/>
 ```
 bool Send(bool keepInQueue)<br/>
