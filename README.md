@@ -4,6 +4,9 @@ This makes your email functionality very easy and simple with background job to 
 # Email Configuration
 Every email system has some basic SMTP configuration to send the email. It has some more basic configuration other than the SMTP.
 
+# NuGet Package
+Install-Package AT.Net.Service -Version 1.0.0 
+
 # In Global.asax :
 ```
 #region [ Email Configuration ]<br/>
