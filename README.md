@@ -1,11 +1,11 @@
 # EasyEmail
 This makes your email functionality very easy and simple with background job to make sure email has been sent and maintain the logs.
 
-# Email Configuration
-Every email system has some basic SMTP configuration to send the email. It has some more basic configuration other than the SMTP.
-
 # NuGet Package
 Install-Package AT.Net.Service -Version 1.0.0 
+
+# Email Configuration
+Every email system has some basic SMTP configuration to send the email. It has some more basic configuration other than the SMTP.
 
 # In Global.asax :
 ```
