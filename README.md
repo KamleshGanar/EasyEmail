@@ -110,3 +110,123 @@ SendAsync(bool keepInQueue, string to, string cc, string bcc, string subject, AT
 If we pass keepInQueue parameter is True then it will maintain the emails in queue into the database and background job will work to send the email and log will be maintain with success and failuare status with remark and error messages.
 If we pass keepInQueue parameter is false then it will send the email directly without maintaining their log.
 
+# Method
+````
+/// <summary>
+/// Method to send the email.
+/// </summary>
+/// <param name="keepInQueue">Provide the boolean value to proceed to keep in queue to send later by background job.</param>
+/// <returns></returns>
+public string Send(bool keepInQueue = true)
+````
+This method is use to send the email. If parameter keepInQueue is true(which is default value) then the system will hold the email information into the database and background job will proceed to send email automatically in specific defined interval. If keepInQueue is false then the system will hold the email information but proceed to send instantly. This method will return the ReferenceID.
+
+````
+/// <summary>
+///  Method to send the email.
+/// </summary>
+/// <param name="keepInQueue">It will keep the email in queue and on time interval retrieve and send it.</param>
+/// <param name="to">Email send to whome. (Semicolon(;) Separated email addressess)</param>
+/// <param name="cc">Carbon copy email send to whome (Semicolon(;) Separated email addressess)</param>
+/// <param name="bcc">Blind carbon copy email send to whome (Semicolon(;) Separated email addressess)</param>
+/// <param name="subject">Email subjects</param>
+/// <param name="priority">Set the sending priorities.</param>
+/// <param name="format">Body format.</param>
+/// <param name="body">Message body.</param>
+/// <returns></returns>
+public string Send(string to, string cc, string bcc, string subject, Priority priority, BodyFormat format, string body, bool keepInQueue = true)
+````
+This is an overload method which accept the email paramters directly with the method.
+
+````
+/// <summary>
+/// Method to send the email asynchronously.
+/// </summary>
+/// <param name="keepInQueue">Provide the boolean value to proceed to keep in queue to send later by background job.</param>
+/// <returns></returns>
+public async Task<string> SendAsync(bool keepInQueue = true)
+````
+This method having the same functionality like Send(bool keepInQueue) method. The basic difference is this method will call asynchronously.
+
+````
+/// <summary>
+///  Method to send the email async.
+/// </summary>
+/// <param name="keepInQueue">It will keep the email in queue and on time interval retrieve and send it.</param>
+/// <param name="to">Email send to whome. (Semicolon(;) Separated email addressess)</param>
+/// <param name="cc">Carbon copy email send to whome (Semicolon(;) Separated email addressess)</param>
+/// <param name="bcc">Blind carbon copy email send to whome (Semicolon(;) Separated email addressess)</param>
+/// <param name="subject">Email subjects</param>
+/// <param name="priority">Set the sending priorities.</param>
+/// <param name="format">Body format.</param>
+/// <param name="body">Message body.</param>
+/// <returns></returns>
+public async Task<string> SendAsync(string to, string cc, string bcc, string subject, Priority priority, BodyFormat format, string body, bool keepInQueue = true)
+````
+This is overload method SendAsync which accept the email parameters directly with the method.
+
+````
+/// <summary>
+/// Method returns directly sent emails.
+/// </summary>
+/// <param name="currentPage">Provide current page number.</param>
+/// <param name="pageSize">Provide page size.</param>
+/// <param name="totalRecords">Provide the output parameter which hold the total number of records.</param>
+/// <returns></returns>
+public List<Email> GetDirectSentMessages(int? currentPage, int? pageSize, ref int totalRecords)
+````
+This method will return the list of emails which are directly sent. These emails were not to be processed by the background job.
+
+````
+///<summary>
+/// This method fetch the emails.
+///</summary>
+///<param name="currentPage">Provide current page number.</param>
+///<param name="pageSize">Provide the page size.</param>
+/// <param name="totalRecords">Provide the output parameter which hold the total number of records.</param>
+/// <param name="includeDirectSentMessages">Provide the true/false to include/exclude the directly sent messages.</param>
+public List<Email> GetEmails(int? currentPage, int? pageSize, ref int totalRecords, bool includeDirectSentMessages = false)
+````
+This method will return all the emails by pagewise. If the parameter includeDirectSentMessages(default value is false) is true then it will include list of directly sent emails also.
+
+````
+/// <summary>
+/// Method is use to include the non in queue emails in queue.
+/// </summary>
+/// <param name="IDs">Provide list of ID</param>
+/// <param name="errorMessage">Provide error message holding parameter.</param>
+public void IncludeEmailsInQueue(List<int> IDs, ref string errorMessage)
+````
+By any mishappen, if the directly send emails were not received by the receiver and reported to the administractor then admin can get process to include those emails into the queue.
+
+````
+/// <summary>
+/// This method fetch the emails which is sent to the specific email address.
+/// </summary>
+/// <param name="receiverEmailAddresses">Provide the receivers email addresses with semi colon(;) separated.</param>
+/// <param name="currentPage">Provide current page number.</param>
+/// <param name="pageSize">Provide the page size.</param>
+/// <returns></returns>
+public List<Email> GetEmails(string receiverEmailAddresses, int? currentPage, int? pageSize, ref int totalRecords, bool includeDirectSentMessages = false)
+````
+This method is use to get all the email of specific receiver's email address.
+
+````
+/// <summary>
+/// This method return the email on the basis of reference ID.
+/// </summary>
+/// <param name="referenceID">Provide processed email reference ID.</param>
+/// <returns></returns>
+public Email GetEmail(string referenceID)
+````
+This method is use to get the email of specific reference ID.
+
+````
+/// <summary>
+/// This method return the log of selected email on the basis of reference ID.
+/// </summary>
+/// <param name="referenceID">Provide processed email reference ID.</param>
+/// <returns></returns>
+public List<Log> GetEmailLog(string referenceID)
+````
+This method will return the email log of specific reference ID.
