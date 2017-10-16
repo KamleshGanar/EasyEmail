@@ -110,7 +110,7 @@ SendAsync(bool keepInQueue, string to, string cc, string bcc, string subject, AT
 If we pass keepInQueue parameter is True then it will maintain the emails in queue into the database and background job will work to send the email and log will be maintain with success and failuare status with remark and error messages.
 If we pass keepInQueue parameter is false then it will send the email directly without maintaining their log.
 
-# Method
+# Methods
 ````
 /// <summary>
 /// Method to send the email.
